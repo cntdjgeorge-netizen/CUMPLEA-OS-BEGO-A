@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HOLA BEGOÑA</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-1: #F7F8FC;
+      --bg-2: #F0F6FF;
+      --accent-1: #7C6CFA;
+      --accent-2: #6EE7B7;
+      --muted: #8b93a7;
+      --btn-bg: linear-gradient(135deg,var(--accent-1),#9BD1FF);
+      --glass: rgba(255,255,255,0.6);
+      --text: #0f1724;
+    }
+
+    /* Reset / base */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      min-height:100vh;
+      font-family: "Poppins", "Raleway", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--text);
+      background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+    }
+
+    /* Sections */
+    .hero{
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      padding:2rem;
+    }
+
+    .hero-inner{
+      text-align:center;
+      max-width:960px;
+      width:100%;
+      backdrop-filter: blur(4px);
+      padding:2.5rem;
+      border-radius:20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0.35));
+      box-shadow: 0 8px 30px rgba(16,24,40,0.08);
+      transform: translateY(8px);
+    }
+
+    h1{
+      font-family: "Raleway", "Poppins", sans-serif;
+      font-weight:700;
+      letter-spacing:2px;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      margin-bottom:0.6rem;
+      color: #0b1220;
+      opacity:0;
+      transform: translateY(12px);
+      animation: introText 800ms ease forwards 120ms;
+    }
+
+    .sub{
+      font-weight:500;
+      color:var(--muted);
+      letter-spacing: 1px;
+      font-size: clamp(0.9rem, 2.5vw, 1.15rem);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:1rem;
+      opacity:0;
+      transform: translateY(12px);
+      animation: introText 900ms ease forwards 360ms;
+    }
+
+    /* arrows */
+    .arrows{
+      display:flex;
+      gap:0.45rem;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .arrow{
+      width:18px;
+      height:18px;
+      opacity:0.95;
+      transform-origin:center;
+      animation: bounce 1.2s ease-in-out infinite;
+    }
+    .arrow:nth-child(2){ animation-delay: 0.12s; opacity:0.85; }
+    .arrow:nth-child(3){ animation-delay: 0.24s; opacity:0.75; }
+
+    @keyframes bounce{
+      0%{ transform: translateY(0); opacity:0.95; }
+      50%{ transform: translateY(10px); opacity:0.7; }
+      100%{ transform: translateY(0); opacity:0.95; }
+    }
+
+    @keyframes introText{
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    /* image section */
+    .content{
+      min-height:70vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:6vh 2rem;
+      flex-direction:column;
+      gap:2rem;
+    }
+
+    .photo-card{
+      width: min(880px, 92%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.45));
+      border-radius:18px;
+      padding:1.25rem;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 10px 40px rgba(12,18,40,0.06);
+      transform: translateY(20px);
+      opacity:0;
+      transition: all 700ms cubic-bezier(.2,.9,.2,1);
+    }
+
+    .photo-card.visible{
+      transform: translateY(0);
+      opacity:1;
+    }
+
+    .photo{
+      width:100%;
+      max-height:66vh;
+      object-fit:contain;
+      border-radius:12px;
+      display:block;
+      box-shadow: 0 12px 40px rgba(12,18,40,0.08);
+      transition: transform 600ms ease, filter 500ms ease;
+      transform-origin:center;
+    }
+
+    .photo:hover{ transform: translateY(-6px) scale(1.01); }
+
+    /* Download button */
+    .controls{
+      margin-top:1rem;
+      display:flex;
+      gap:1rem;
+      align-items:center;
+      flex-direction:column;
+      width:100%;
+    }
+
+    .btn{
+      -webkit-tap-highlight-color: transparent;
+      cursor:pointer;
+      border:0;
+      outline:0;
+      padding:12px 26px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:1rem;
+      background: var(--btn-bg);
+      color:white;
+      box-shadow: 0 10px 30px rgba(124,108,250,0.18);
+      position:relative;
+      overflow:hidden;
+      transition: transform 180ms ease, box-shadow 220ms ease;
+    }
+
+    .btn:active{ transform: translateY(1px) scale(.998); }
+    .btn:hover{
+      transform: translateY(-4px);
+      box-shadow: 0 18px 50px rgba(124,108,250,0.22);
+    }
+
+    /* shine effect */
+    .btn::after{
+      content:'';
+      position:absolute;
+      top:-40%;
+      left:-40%;
+      width:30%;
+      height:180%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06), rgba(255,255,255,0.18));
+      transform: rotate(25deg) translateX(-120%);
+      transition: transform 650ms ease;
+      filter: blur(8px);
+      pointer-events:none;
+    }
+
+    .btn:hover::after{ transform: rotate(25deg) translateX(300%); }
+
+    /* final text */
+    .final-text{
+      font-size: clamp(1rem, 2.5vw, 1.05rem);
+      color:#223;
+      margin-top:0.6rem;
+      opacity:0.95;
+      text-align:center;
+      font-weight:600;
+    }
+
+    /* small screens */
+    @media (max-width:600px){
+      .hero-inner{ padding:1.6rem; border-radius:14px; }
+      .sub{ gap:0.6rem; font-size:0.95rem; }
+      .btn{ padding:12px 20px; font-size:0.95rem; }
+    }
+
+    /* utility spacing to encourage scroll */
+    .spacer{ height:40vh; }
+
+    /* accessible focus */
+    .btn:focus{ box-shadow: 0 0 0 4px rgba(124,108,250,0.14); }
+  </style>
+</head>
+<body>
+
+  <!-- HERO (full screen) -->
+  <section class="hero" aria-labelledby="main-title">
+    <div class="hero-inner" role="banner">
+      <h1 id="main-title">HOLA BEGOÑA</h1>
+
+      <div class="sub" aria-hidden="false">
+        <span>DESLIZA ABAJO</span>
+
+        <div class="arrows" aria-hidden="true" title="flechas bajar">
+          <!-- simple chevron down SVGs -->
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="#51607A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="#51607A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" stroke="#51607A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- spacer to smoothly scroll -->
+  <div class="spacer" aria-hidden="true"></div>
+
+  <!-- CONTENT (image + button + final text) -->
+  <main class="content" role="main" id="main-content">
+
+    <div class="photo-card" id="photoCard" aria-live="polite">
+      <!-- Replace src below with your image (same-origin or CORS-enabled if you want programmatic download) -->
+      <img
+        id="photo"
+        class="photo"
+        alt="Foto de ejemplo - sustituye este src por tu imagen"
+        src="begoña.jpg"
+      >
+
+      <div class="controls" role="group" aria-label="Controles de la foto">
+        <button id="downloadBtn" class="btn" title="Descargar la foto">DESCARGAR FOTO</button>
+
+        <div class="final-text" id="finalText">FELIZ CUMPLEAÑOS BEGOÑI, DE Yorch ❤</div>
+      </div>
+    </div>
+
+    <!-- extra bottom spacing -->
+    <div style="height:8vh"></div>
+  </main>
+
+  <script>
+    // Smooth fade-in when the photo enters viewport
+    (function(){
+      const card = document.getElementById('photoCard');
+      const img = document.getElementById('photo');
+
+      // Intersection Observer to add class when visible
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            card.classList.add('visible');
+            // once visible, we can unobserve
+            observer.unobserve(card);
+          }
+        });
+      }, { threshold: 0.22 });
+
+      observer.observe(card);
+
+      // Download logic
+      const btn = document.getElementById('downloadBtn');
+
+      // Helper to trigger download via blob (works around some CORS in many common cases; if CORS blocks fetch, fallback to anchor)
+      async function downloadImageFromSrc(imgEl, filename = 'foto-descargada.jpg') {
+        const src = imgEl.currentSrc || imgEl.src;
+        try {
+          // Try fetching the image as blob
+          const resp = await fetch(src, {mode: 'cors'});
+          if(!resp.ok) throw new Error('Fetch failed: ' + resp.status);
+          const blob = await resp.blob();
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+        } catch (err) {
+          // Fallback: try simple anchor (works if same-origin or browser allows)
+          console.warn('Descarga por blob fallida, intentando fallback anchor:', err);
+          const a = document.createElement('a');
+          a.href = src;
+          a.target = '_blank';
+          a.download = filename;
+          // For cross-origin images the download attribute may be ignored; opening in new tab is fallback
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }
+      }
+
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        btn.setAttribute('aria-busy', 'true');
+        btn.disabled = true;
+
+        // derive filename from src or use default
+        let filename = 'foto-descargada';
+        try {
+          const urlParts = (img.currentSrc || img.src).split('/');
+          const last = urlParts.pop() || urlParts.pop();
+          if(last && last.includes('.')) filename = last.split('?')[0];
+        } catch (e) { /* ignore */ }
+        // ensure extension
+        if(!filename.includes('.')) filename += '.jpg';
+
+        await downloadImageFromSrc(img, filename);
+
+        btn.disabled = false;
+        btn.removeAttribute('aria-busy');
+      });
+
+      // Small accessibility: pressing down arrow from hero scrolls to content
+      document.addEventListener('keydown', (ev) => {
+        if(ev.key === "ArrowDown"){
+          document.getElementById('main-content').scrollIntoView({behavior:'smooth'});
+        }
+      });
+
+      // Optional: if user clicks anywhere on hero arrows area, scroll
+      document.querySelectorAll('.arrows, .sub').forEach(el=>{
+        el.addEventListener('click', ()=> {
+          document.getElementById('main-content').scrollIntoView({behavior:'smooth'});
+        });
+      });
+    })();
+  </script>
+
+</body>
+</html>
