@@ -1,202 +1,297 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HOLA BEGOÑA</title>
-<style>
-  /* ---------- ESTILO GENERAL ---------- */
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #d8b4fe, #fbc2eb);
-    color: #333;
-    text-align: center;
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-  }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>HOLA BEGOÑA</title>
 
-  section {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
 
-  h1 {
-    font-size: 4rem;
-    animation: fadeInDown 1.5s ease;
-  }
+  <style>
+    :root{
+      --bg-1: #F7F8FC;
+      --bg-2: #F0F6FF;
+      --accent-1: #7C6CFA;
+      --accent-2: #6EE7B7;
+      --muted: #8b93a7;
+      --btn-bg: linear-gradient(135deg,var(--accent-1),#9BD1FF);
+      --text: #0f1724;
+    }
 
-  p {
-    font-size: 1.3rem;
-    margin-top: 10px;
-    animation: fadeInUp 2s ease;
-  }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      min-height:100vh;
+      font-family: "Poppins","Raleway",sans-serif;
+      color:var(--text);
+      background: linear-gradient(180deg,var(--bg-1) 0%,var(--bg-2) 100%);
+      display:flex;
+      flex-direction:column;
+      align-items:stretch;
+      overflow-x:hidden;
+    }
 
-  /* ---------- FLECHAS ---------- */
-  .arrows {
-    margin-top: 20px;
-  }
+    .hero{
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:2rem;
+    }
 
-  .arrow {
-    display: block;
-    width: 30px;
-    height: 30px;
-    margin: 5px auto;
-    animation: bounce 1.5s infinite;
-  }
+    .hero-inner{
+      text-align:center;
+      backdrop-filter:blur(4px);
+      padding:2.5rem;
+      border-radius:20px;
+      background:rgba(255,255,255,0.4);
+      box-shadow:0 8px 30px rgba(16,24,40,0.08);
+    }
 
-  @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-    40% {transform: translateY(10px);}
-    60% {transform: translateY(5px);}
-  }
+    h1{
+      font-weight:700;
+      letter-spacing:2px;
+      font-size:clamp(2.2rem,6vw,4rem);
+      margin-bottom:0.6rem;
+      color:#0b1220;
+      opacity:0;
+      transform:translateY(12px);
+      animation:introText 0.8s ease forwards 0.12s;
+    }
 
-  @keyframes fadeInDown {
-    from {opacity: 0; transform: translateY(-30px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
+    .sub{
+      font-weight:500;
+      color:var(--muted);
+      letter-spacing:1px;
+      font-size:clamp(0.9rem,2.5vw,1.15rem);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:1rem;
+      opacity:0;
+      transform:translateY(12px);
+      animation:introText 0.9s ease forwards 0.36s;
+    }
 
-  @keyframes fadeInUp {
-    from {opacity: 0; transform: translateY(30px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
+    .arrows{
+      display:flex;
+      gap:0.45rem;
+      align-items:center;
+      justify-content:center;
+    }
 
-  /* ---------- IMAGEN ---------- */
-  .image-section img {
-    width: 80%;
-    max-width: 400px;
-    border-radius: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 1s ease;
-  }
+    .arrow{
+      width:18px;height:18px;opacity:0.95;
+      transform-origin:center;
+      animation:bounce 1.2s ease-in-out infinite;
+    }
+    .arrow:nth-child(2){animation-delay:.12s;opacity:.85}
+    .arrow:nth-child(3){animation-delay:.24s;opacity:.75}
 
-  .image-section img.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    @keyframes bounce{
+      0%{transform:translateY(0)}
+      50%{transform:translateY(10px)}
+      100%{transform:translateY(0)}
+    }
 
-  /* ---------- BOTÓN DESCARGAR ---------- */
-  .btn {
-    margin-top: 20px;
-    padding: 12px 30px;
-    background: #7f5af0;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(127, 90, 240, 0.5);
-  }
+    @keyframes introText{
+      to{opacity:1;transform:translateY(0)}
+    }
 
-  .btn:hover {
-    background: #9b79ff;
-    box-shadow: 0 0 20px rgba(127, 90, 240, 0.8);
-  }
+    .content{
+      min-height:70vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:6vh 2rem;
+      flex-direction:column;
+      gap:2rem;
+    }
 
-  .final-text {
-    margin-top: 30px;
-    font-size: 1.3rem;
-    color: #444;
-    animation: fadeInUp 1.5s ease;
-  }
+    .photo-card{
+      width:min(880px,92%);
+      background:rgba(255,255,255,0.6);
+      border-radius:18px;
+      padding:1.25rem;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      box-shadow:0 10px 40px rgba(12,18,40,0.06);
+      transform:translateY(20px);
+      opacity:0;
+      transition:all 0.7s cubic-bezier(.2,.9,.2,1);
+    }
 
-  /* ---------- BOTÓN DE MÚSICA ---------- */
-  #music-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background: white;
-    border: none;
-    border-radius: 30px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    z-index: 10;
-  }
+    .photo-card.visible{transform:translateY(0);opacity:1}
 
-  #music-btn:hover {
-    background: #7f5af0;
-    color: white;
-    box-shadow: 0 4px 20px rgba(127, 90, 240, 0.6);
-  }
+    .photo{
+      width:100%;
+      max-height:66vh;
+      object-fit:contain;
+      border-radius:12px;
+      box-shadow:0 12px 40px rgba(12,18,40,0.08);
+      transition:transform .6s ease;
+    }
+    .photo:hover{transform:translateY(-6px) scale(1.01)}
 
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width: 600px) {
-    h1 { font-size: 2.8rem; }
-    p { font-size: 1.1rem; }
-    .btn { font-size: 1rem; padding: 10px 25px; }
-  }
-</style>
+    .controls{margin-top:1rem;display:flex;flex-direction:column;align-items:center;gap:1rem}
+
+    .btn{
+      cursor:pointer;
+      border:0;outline:0;
+      padding:12px 26px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:1rem;
+      background:var(--btn-bg);
+      color:#fff;
+      box-shadow:0 10px 30px rgba(124,108,250,0.18);
+      position:relative;
+      overflow:hidden;
+      transition:transform 0.18s ease,box-shadow 0.22s ease;
+    }
+    .btn:hover{transform:translateY(-4px);box-shadow:0 18px 50px rgba(124,108,250,0.22)}
+    .btn::after{
+      content:'';position:absolute;top:-40%;left:-40%;
+      width:30%;height:180%;
+      background:linear-gradient(120deg,rgba(255,255,255,.18),rgba(255,255,255,.06),rgba(255,255,255,.18));
+      transform:rotate(25deg) translateX(-120%);
+      transition:transform .65s ease;
+      filter:blur(8px);pointer-events:none;
+    }
+    .btn:hover::after{transform:rotate(25deg) translateX(300%)}
+
+    .final-text{
+      font-size:clamp(1rem,2.5vw,1.05rem);
+      color:#223;
+      text-align:center;
+      font-weight:600;
+    }
+
+    @media(max-width:600px){
+      .hero-inner{padding:1.6rem;border-radius:14px}
+      .btn{padding:12px 20px;font-size:.95rem}
+    }
+
+    .spacer{height:40vh}
+
+    /* ----------------- BOTÓN DE MÚSICA (IZQUIERDA) ----------------- */
+    #music-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: white;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 30px rgba(12,18,40,0.12);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 9999;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+    }
+    #music-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 50px rgba(12,18,40,0.18);
+    }
+  </style>
 </head>
 <body>
 
-<!-- AUDIO OCULTO -->
-<audio id="bg-music" src="cancionweb.mp3" loop></audio>
+  <!-- 🎵 Música de fondo (sin autoplay para evitar bloqueos) -->
+  <audio id="bg-music" src="cancionweb.mp3" loop></audio>
 
-<!-- BOTÓN PARA REPRODUCIR MÚSICA -->
-<button id="music-btn">MIRA QUE GUAY ESTO 👀</button>
+  <!-- BOTÓN izquierdo para activar música -->
+  <button id="music-btn" aria-label="Reproducir música">MIRA QUE GUAY ESTO 👀</button>
 
-<section>
-  <h1>HOLA BEGOÑA</h1>
-  <p>DESLIZA ABAJO</p>
-  <div class="arrows">
-    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-    </svg>
-    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-    </svg>
-    <svg class="arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-    </svg>
-  </div>
-</section>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>HOLA BEGOÑA</h1>
+      <div class="sub">
+        <span>DESLIZA ABAJO</span>
+        <div class="arrows">
+          <svg class="arrow" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#51607A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="arrow" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#51607A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="arrow" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="#51607A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="image-section">
-  <img src="begona.jpg" alt="Foto de Begoña" id="foto">
-  <button class="btn" id="descargar">DESCARGAR FOTO</button>
-  <p class="final-text">FELIZ CUMPLEAÑOS BEGOÑI, DE Yorch ❤</p>
-</section>
+  <div class="spacer"></div>
 
-<script>
-  // --- REPRODUCIR MÚSICA AL CLICAR EL BOTÓN ---
-  const btn = document.getElementById('music-btn');
-  const audio = document.getElementById('bg-music');
+  <main class="content" id="main-content">
+    <div class="photo-card" id="photoCard">
+      <img id="photo" class="photo" src="begoña.jpg" alt="Foto de Begoña">
+      <div class="controls">
+        <button id="downloadBtn" class="btn">DESCARGAR FOTO</button>
+        <div class="final-text">FELIZ CUMPLEAÑOS BEGOÑI, DE Yorch ❤</div>
+      </div>
+    </div>
+    <div style="height:8vh"></div>
+  </main>
 
-  btn.addEventListener('click', () => {
-    audio.play().catch(() => {});
-    btn.remove(); // elimina el botón después de pulsarlo
-  });
+  <script>
+    // Aparición de la tarjeta de la foto (observer)
+    const card = document.getElementById('photoCard');
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          card.classList.add('visible');
+          observer.unobserve(card);
+        }
+      });
+    },{threshold:0.2});
+    observer.observe(card);
 
-  // --- ANIMACIÓN DE APARICIÓN DE IMAGEN ---
-  const foto = document.getElementById('foto');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) foto.classList.add('visible');
+    // Descargar imagen
+    const btn = document.getElementById('downloadBtn');
+    const img = document.getElementById('photo');
+    btn.addEventListener('click', async()=>{
+      const src = img.currentSrc || img.src;
+      const a = document.createElement('a');
+      a.href = src;
+      // nombre por defecto (cambia si quieres otro)
+      a.download = 'foto-begoña.jpg';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
     });
-  });
-  observer.observe(foto);
 
-  // --- DESCARGAR IMAGEN ---
-  document.getElementById('descargar').addEventListener('click', () => {
-    const enlace = document.createElement('a');
-    enlace.href = 'begona.jpg';
-    enlace.download = 'begona.jpg';
-    enlace.click();
-  });
-</script>
+    // Scroll cuando se clicka en flechas o texto
+    document.querySelectorAll('.arrows,.sub').forEach(el=>{
+      el.addEventListener('click', ()=>{
+        document.getElementById('main-content').scrollIntoView({behavior:'smooth'});
+      });
+    });
+
+    /* ------------------ LÓGICA DEL BOTÓN DE MÚSICA ------------------ */
+    const musicBtn = document.getElementById('music-btn');
+    const audio = document.getElementById('bg-music');
+
+    musicBtn.addEventListener('click', async () => {
+      try {
+        // Intenta reproducir; algunos navegadores devuelven una promesa
+        await audio.play();
+        // Si se reproduce correctamente, eliminamos el botón (no podrá pausar)
+        musicBtn.remove();
+      } catch (err) {
+        // Si falla (política del navegador), intentamos reintentar visualmente:
+        // cambiamos texto para invitar a intentarlo de nuevo (y dejamos el botón)
+        musicBtn.textContent = 'Toca otra vez para activar 🎧';
+        // opcional: pequeño pulso visual
+        musicBtn.style.transform = 'scale(1.03)';
+        setTimeout(()=> musicBtn.style.transform = '', 220);
+        console.warn('Reproducción bloqueada por el navegador:', err);
+      }
+    });
+  </script>
 
 </body>
 </html>
